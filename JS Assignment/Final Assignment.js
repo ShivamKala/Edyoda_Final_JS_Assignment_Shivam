@@ -209,7 +209,7 @@ function handleClick(e) {
             var productToAdd = null;
             for (var t of productData) {
               if (t.preview == e.target.src) {
-                console.log(t);
+                // console.log(t);
                 productToAdd = t;
                 // break;
                 // elecount++;
@@ -228,24 +228,6 @@ function handleClick(e) {
               }
             }
           }
-          var card = document.createElement("div");
-          card.innerHTML = `<div class="checkout-card">
-                        <div><img class="checkout-product-img"
-                                src="https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/2060340/2017/9/14/11505387708574-Puma-Men-Black-Solid-Sporty-Jacket-371505387708496-1.jpg">
-                        </div>
-                        <div>
-                            <h4>Men Black MAMGP T7 Sweat Sporty Jacket</h4>
-                            <p>x3</p>
-                            <p><span>Amount: Rs </span><span>23997</span></p>
-                        </div>
-                    </div>`;
-          var b = document.getElementById("card-list");
-          console.log(b);
-          console.log(cart);
-          console.log(itemCounts);
-
-          // localStorage.clear();
-          // console.log(elecount);
         }
       }
     }

@@ -206,26 +206,29 @@ function handleClick(e) {
             cartCount++;
             cartCountElement.textContent = cartCount;
             localStorage.setItem("cartCount", cartCount);
+
             var productToAdd = null;
+
             for (var t of productData) {
               if (t.preview == e.target.src) {
-                // console.log(t);
                 productToAdd = t;
-                // break;
-                // elecount++;
+                break;
               }
-              if (productToAdd) {
-                // Check if the product is already in the cart
-                if (itemCounts[productToAdd.id]) {
-                  itemCounts[productToAdd.id]++;
-                } else {
-                  itemCounts[productToAdd.id] = 1;
-                  cart.push(productToAdd);
-                }
-                // Store the updated cart and item counts in localStorage
-                localStorage.setItem("cart", JSON.stringify(cart));
-                localStorage.setItem("itemCounts", JSON.stringify(itemCounts));
+            }
+
+            if (productToAdd) {
+              if (cart.some((item) => item.id === productToAdd.id)) {
+                // If the item is already in the cart, increment the item count
+                itemCounts[productToAdd.id] =
+                  (itemCounts[productToAdd.id] || 0) + 1;
+              } else {
+                // If the item is not in the cart, add it to the cart and set the item count to 1
+                cart.push(productToAdd);
+                itemCounts[productToAdd.id] = 1;
               }
+
+              localStorage.setItem("cart", JSON.stringify(cart));
+              localStorage.setItem("itemCounts", JSON.stringify(itemCounts));
             }
           }
         }
@@ -233,3 +236,20 @@ function handleClick(e) {
     }
   };
 }
+
+// var itemCounts = JSON.parse(localStorage.getItem("itemCounts")) || {};
+// var navcart = 0;
+// for (var j in itemCounts) {
+//   navcart = navcart + itemCounts[j];
+// }
+// document.getElementById("cart-count").innerText = navcart;
+
+// window.addEventListener("beforeunload", function (event) {
+//   // List of keys you want to remove
+//   var keysToRemove = ["cart", "itemcounts", "cartCount"];
+
+//   // Loop through the keys and remove them
+//   for (var i = 0; i < keysToRemove.length; i++) {
+//     localStorage.removeItem(keysToRemove[i]);
+//   }
+// });
